@@ -24,7 +24,7 @@ class AuthController extends Controller {
         ]);
 
         $user = $this->auth_service->register($data);
-        $token = $user->createToken('auth_token')->plain_text_token;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'access_token'=>$token,
@@ -40,7 +40,7 @@ class AuthController extends Controller {
         ]);
 
         $user = $this->auth_service->login($credentials);
-        $token = $user->create_token('auth_token')->plain_text_token;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'access_token'=>$token,

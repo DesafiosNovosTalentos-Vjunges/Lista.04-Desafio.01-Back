@@ -9,7 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService {
 
-    public function register(arrey $data){
+    public function register(array $data){
 
         return User::create([
             'name'=>$data['name'],
@@ -18,7 +18,7 @@ class AuthService {
         ]);
     }
 
-    public function login(arrey $credentials){
+    public function login(array $credentials){
         
         if(!Auth::attempt($credentials)){
             throw ValidationException::WithMessages([
