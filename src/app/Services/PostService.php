@@ -6,9 +6,9 @@ use App\Models\Post;
 
 class PostService {
 
-    public function creatPost(array $data, int $user_id){
+    public function createPost(array $data, int $user_id){
 
-        return Post::creat ([
+        return Post::create ([
             'user_id' => $user_id,
             'title'   => $data['title'],
             'content' => $data['content'],
