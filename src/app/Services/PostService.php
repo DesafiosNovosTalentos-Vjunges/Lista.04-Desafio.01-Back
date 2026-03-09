@@ -13,7 +13,7 @@ class PostService {
 
     public function createPost(array $data, string $user_id){
         $data['author_id'] = $user_id;
-        $data['status'] = $data['status'] ?? 'Draft';
+        $data['status'] = $data['status'] ?? 'DRAFT';
 
         return $this->post_repository->create($data);
     }
@@ -43,6 +43,6 @@ class PostService {
 
     public function archivePost(string $id){
         $post = $this->post_repository->findById($id);
-        return $this->post_repository->delete($post, ['status' => 'ARCHIVED']);
+        return $this->post_repository->update($post, ['status' => 'ARCHIVED']);
     }
 }
