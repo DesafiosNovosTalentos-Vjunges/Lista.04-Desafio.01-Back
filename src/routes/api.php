@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/posts/{id}/comments', [CommentController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('auth/logout', [AuthController::class, 'logout']);
@@ -15,6 +20,12 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::post('/posts', [PostController::class, 'store']);
+    Route::put('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+    Route::patch('/posts/{id}/archive', [PostController::class, 'archive']);
+
+    Route::post('/post/{id}/comments', [CommentController::class], ['store']);
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
 });
 
 Route::get('/user', function (Request $request) {

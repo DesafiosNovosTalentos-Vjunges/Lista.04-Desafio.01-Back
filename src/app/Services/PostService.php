@@ -2,17 +2,19 @@
 
 namespace App\Services;
 
-use App\Models\Post;
+use app\Domain\Post\PostRepositoryInterface;
 
 class PostService {
+    protected $post_repository;
 
-    public function createPost(array $data, int $user_id){
+    public function __construct(PostRepositoryInterface $post_repository){
+        $this->post_repository = $post_repository;
+    }
 
-        return Post::create ([
-            'user_id' => $user_id,
-            'title'   => $data['title'],
-            'content' => $data['content'],
-            'status'  => $data['status'] ?? 'PUBLISHED',
-        ]);
+    public function createPost(array $data, string $user_id){
+        $data['author_id'] = $user_id;
+        $data['status'] = $data['status'] ?? 'Draft';
+
+        return $this->post_repository->create($data);
     }
 }

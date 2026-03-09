@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request){
         $validated_data = $request->validated();
-        $user_id = $request->user->id;
+        $user_id = $request->user()->id;
         $new_post = $this->post_service->createPost($validated_data, $user_id);
 
         return response()->json($new_post, 201);
