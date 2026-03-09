@@ -1,7 +1,9 @@
 <?php
 
-namespace app\Domain\Post;
+namespace App\Domain\Post;
 
 interface PostRepositoryInterface{
     public function create(array $data);
+
+    public function getAllPublished();
 }

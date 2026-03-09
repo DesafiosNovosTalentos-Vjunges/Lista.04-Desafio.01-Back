@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+       Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('content');
-            $table->enum('status', ['PUBLISHED', 'ARCHIVED'])->default('PUBLISHED');
+            $table->foreignUuid('author_id')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['DRAFT', 'PUBLISHED', 'ARCHIVED'])->default('DRAFT');
             $table->timestamps();
             $table->softDeletes();
         });

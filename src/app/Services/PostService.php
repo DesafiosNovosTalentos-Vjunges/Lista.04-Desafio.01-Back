@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use app\Domain\Post\PostRepositoryInterface;
+use App\Domain\Post\PostRepositoryInterface;
 
 class PostService {
     protected $post_repository;
@@ -16,5 +16,9 @@ class PostService {
         $data['status'] = $data['status'] ?? 'Draft';
 
         return $this->post_repository->create($data);
+    }
+
+    public function getAllPublishedPosts(){
+        return $this->post_repository->getAllPublished();
     }
 }

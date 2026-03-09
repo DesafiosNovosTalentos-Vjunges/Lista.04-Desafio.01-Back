@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use app\Domain\Post\PostRepositoryInterface;
-use app\Infrastructure\Eloquent\PostRepository;
+use App\Domain\Post\PostRepositoryInterface;
+use App\Infrastructure\Eloquent\PostRepository;
 
 class AppServiceProvider extends ServiceProvider
 {

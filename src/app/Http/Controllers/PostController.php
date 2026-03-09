@@ -21,4 +21,10 @@ class PostController extends Controller
 
         return response()->json($new_post, 201);
     }
+
+    public function index(){
+        $posts = $this->post_service->getAllPublishedPosts();
+
+        return response()->json($posts, 200);
+    }
 }

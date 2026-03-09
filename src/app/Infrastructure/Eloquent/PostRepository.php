@@ -1,12 +1,16 @@
 <?php
 
-namespace app\Infrastructure\Eloquent;
+namespace App\Infrastructure\Eloquent;
 
-use app\Domain\Post\PostRepositoryInterface;
-use app\Models\Post;
+use App\Domain\Post\PostRepositoryInterface;
+use App\Models\Post;
 
 class PostRepository implements PostRepositoryInterface{
-    public function creat(array $data){
+    public function create(array $data){
         return Post::create($data);
+    }
+
+    public function getAllPublished(){
+        return Post::with('author')->where('status', 'PUBLISHED')->get();
     }
 }
