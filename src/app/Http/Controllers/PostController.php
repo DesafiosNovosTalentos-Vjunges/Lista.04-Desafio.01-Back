@@ -27,4 +27,42 @@ class PostController extends Controller
 
         return response()->json($posts, 200);
     }
+
+    public function show($id){
+        $post = $this->post_service->getPostById($id);
+        return response()->json($post, 200);
+    }
+
+    public function update(Request $request, $id){
+        $post = $this->post_service->getPostById($id);
+
+        $this->authorize('update', $post);
+
+        $data = $request->validate([
+            'title' => 'sometimes|required|string',
+            'content' => 'sometimes|required|string',
+            'status' => 'sometimes|in:DRAFT,PUBLISHED,ARCHIVED'
+        ]);
+
+        $updated_post = $this->post_service->updatePost($id, $data);
+        return response()->json($updated_post, 200);
+    }
+
+    public function destroy($id){
+        $post = $this->post_service->getPostById($id);
+
+        $this->authorize('delete', $post);
+        $this->post_service->deletePost($id);
+
+        return response()->noContent();
+    }
+
+    public function archive($id){
+        $post = $this->post_service->getPostById($id);
+
+        $this->authorize('archive', $post);
+        $this->post_service->archivePost($id);
+
+        return response()->json(['message' => 'Post enviado com sucesso!'], 200);
+    }
 }
