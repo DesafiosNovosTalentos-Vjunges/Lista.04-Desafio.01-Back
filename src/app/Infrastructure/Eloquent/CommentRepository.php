@@ -7,7 +7,7 @@ use App\Models\Comment;
 
 class CommentRepository implements CommentRepositoryInterface{
     public function getByPostId(string $post_id){
-        return Comment::with('author')->where('post_id', $postId)->get();
+        return Comment::with('author')->where('post_id', $post_id)->get();
     }
 
     public function create(array $data){
