@@ -15,29 +15,29 @@ class CommentService{
     }
 
     public function getCommentsByPost(string $post_id){
-        $this->postRepository->findById($post_id);
+        $this->post_repository->findById($post_id);
 
-        return $this->commentRepository->getByPostId($post_id);
+        return $this->comment_repository->getByPostId($post_id);
     }
 
     public function createComment(array $data, string $user_id){
-        $post = $this->postRepository->findById($data['post_id']);
+        $post = $this->post_repository->findById($data['post_id']);
 
         if ($post->status === 'ARCHIVED') {
             abort(403, 'Não é permitido adicionar comentários em posts arquivados.');
         }
 
         $data['author_id'] = $user_id;
-        return $this->CommentRepository->create($data);
+        return $this->comment_repository->create($data);
     }
 
     public function getCommentById(string $id){
-        return $this->commentRepository->findById($id);
+        return $this->comment_repository->findById($id);
     }
 
     public function deleteComment(string $id){
-        $comment = $this->commentRepository->findById($id);
+        $comment = $this->comment_repository->findById($id);
 
-        return $this->commentRepository->delete($comment);
+        return $this->comment_repository->delete($comment);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Eloquent;
 
-use App\Doamin\Comment\CommentRepositoryInterface;
+use App\Domain\Comment\CommentRepositoryInterface;
 use App\Models\Comment;
 
 class CommentRepository implements CommentRepositoryInterface{
